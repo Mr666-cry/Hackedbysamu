@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacked By SamXploit</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: black;
+        color: #ff0000;
+        font-family: 'Courier New', monospace;
+        text-align: center;
+    }
+
+    /* Efek titik merah */
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    /* Foto bulat */
+    .profile-pic {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 5px solid #ff0000;
+        margin-top: 50px;
+        box-shadow: 0 0 20px red;
+    }
+
+    /* Teks hacker */
+    .hacker-text {
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    }
+
+    .desc-text {
+        font-size: 18px;
+        color: #f8d7da;
+        margin-top: 10px;
+    }
+
+    /* Tombol lagu */
+    .music-btn {
+        margin-top: 30px;
+        background: linear-gradient(45deg, #ff0000, #cc0000);
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #ff0000, 0 0 30px #cc0000;
+        transition: 0.3s;
+    }
+
+    .music-btn:hover {
+        background: linear-gradient(45deg, #cc0000, #990000);
+        transform: scale(1.1);
+        box-shadow: 0 0 25px #ff0000, 0 0 40px #cc0000;
+    }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<img src="https://i.postimg.cc/HxTTdpRn/IMG-20250718-134112.jpg" alt="Profile" class="profile-pic">
+
+<div class="hacker-text">Hacked By SamXploit</div>
+<div class="desc-text">Your system security is nothing. We control everything.<br>
+We Are SamXploit – Fear The Power Of Knowledge!</div>
+
+<button class="music-btn" onclick="toggleMusic()">▶ Play Hacker Theme</button>
+
+<audio id="bgMusic" src="https://files.catbox.moe/48dbds.mp3"></audio>
+
+<script>
+/* Efek titik merah kelap kelip berjatuhan */
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particlesArray = [];
+const numberOfParticles = 100;
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3;
+        this.speed = Math.random() * 2 + 1;
+        this.alpha = Math.random();
+    }
+    update() {
+        this.y += this.speed;
+        if (this.y > canvas.height) {
+            this.y = 0;
+            this.x = Math.random() * canvas.width;
+        }
+    }
+    draw() {
+        ctx.fillStyle = `rgba(255,0,0,${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function init() {
+    particlesArray = [];
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+/* Musik Play/Pause */
+let isPlaying = false;
+const bgMusic = document.getElementById('bgMusic');
+
+function toggleMusic() {
+    if (!isPlaying) {
+        bgMusic.play();
+        document.querySelector('.music-btn').innerText = "⏸ Pause Hacker Theme";
+    } else {
+        bgMusic.pause();
+        document.querySelector('.music-btn').innerText = "▶ Play Hacker Theme";
+    }
+    isPlaying = !isPlaying;
+}
+</script>
+</body>
+</html>
